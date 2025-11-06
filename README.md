@@ -1,5 +1,10 @@
 # 🗳️ Secure E-Voting with Facial Recognition using AI
 
+### 🧠 Trained Model
+The trained model used for face recognition can be downloaded here:  
+[Download Trained.yml from Google Drive](https://drive.google.com/file/d/1ILBEYvWkxUke3ONnG-xW6eh_gjU0O72u/view?usp=sharing)
+
+
 ## 🔒 Overview
 This project aims to build a **secure and efficient electronic voting system** that uses **facial recognition** to authenticate voters.  
 It eliminates the need for traditional voter IDs, reduces fraud, and ensures **one person can vote only once**, providing a transparent, AI-powered e-voting experience.
