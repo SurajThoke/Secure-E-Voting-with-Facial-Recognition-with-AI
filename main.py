@@ -25,7 +25,7 @@ cascade = cv2.CascadeClassifier(facialdata)
 
 mydb=pymysql.connect(host='localhost', user='root', password='admin', port=3306, database='smart_voting')
 
-sender_address = 'hemali.firke@gmail.com' #sender's email id
+sender_address = 'suarjthoke06@gmail.com' #sender's email id
 sender_password= 'ynppomwqwkbxuhcs' #sender's email password
 
 app = Flask(__name__)
