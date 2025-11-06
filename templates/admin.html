@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | SmartVote AI</title>
+    
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico" rel="icon">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(to bottom right, #bdefff, #dff9ff, #a9e2ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            background: #fff;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .navbar-container a {
+            text-decoration: none;
+            color: #005e7a;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .navbar-container a:hover, .navbar-container .active {
+            color: #0097c2;
+            font-weight: 600;
+        }
+
+        /* Main Center Container */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        /* Login Card */
+        .admin-card {
+            width: 420px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        /* Controls Card */
+        .controls-card {
+            width: 500px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        /* Tagline */
+        .tagline-box h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #005e7a;
+            margin-bottom: 5px;
+        }
+
+        .tagline-box p {
+            font-size: 14px;
+            color: #003f52;
+            opacity: 0.85;
+            margin-bottom: 15px;
+        }
+
+        /* Form Inputs */
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid #bcdfea;
+            background: #f7fcff;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #0097c2;
+        }
+
+        /* Button */
+        .btn {
+            padding: 14px 25px;
+            background: #0097c2;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #007ea3;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px 0 15px;
+            font-size: 13px;
+            color: #004f63;
+            opacity: 0.8;
+        }
+        
+        /* Alert styling */
+        .alert-container {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="navbar-container">
+        <a href="{{ url_for('logout') }}">Home</a>
+        <a href="{{ url_for('admin') }}" class="active">Admin</a>
+        <a href="{{ url_for('train') }}">Train</a>
+    </div>
+</div>
+
+<!-- Flash Messages -->
+<div class="alert-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-container">
+    {% if admin == False %}
+        <!-- Login Form -->
+        <div class="admin-card">
+            <div class="tagline-box">
+                <h2>SmartVote AI Security Portal</h2>
+                <p>Authorized Access Only • AI-Verified Entry • Secure Login</p>
+            </div>
+
+            <h1 style="color:#004f63;margin-bottom:20px;">Admin Login</h1>
+
+            <form action="{{ url_for('admin') }}" method="post">
+                <input type="email" name="email" placeholder="Enter Email" required>
+                <input type="password" name="password" placeholder="Enter Password" required>
+                <button class="btn" type="submit" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    {% else %}
+        <!-- Admin Controls -->
+        <div class="controls-card">
+            <div class="tagline-box">
+                <h2>SmartVote AI Administration</h2>
+                <p>Secure Management Portal • Authorized Controls • System Administration</p>
+            </div>
+
+            <h1 style="color:#004f63;margin-bottom:30px;">Administrator Controls</h1>
+
+            <div class="controls-buttons">
+                <a class="btn" href="{{ url_for('assembly') }}" style="font-size:18px;"><b>Add Nominee</b></a>
+                <a class="btn" href="{{ url_for('select_village') }}" style="font-size:18px;"><b>View Results</b></a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- FOOTER -->
+<p class="footer">© 2025 SmartVote AI — Secure Administration Portal</p>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="static/lib/easing/easing.min.js"></script>
+<script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="static/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="static/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="static/mail/jqBootstrapValidation.min.js"></script>
+<script src="static/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="static/js/main.js"></script>
+</body>
+</html>

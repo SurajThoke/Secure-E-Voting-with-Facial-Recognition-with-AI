@@ -1,0 +1,19 @@
+# Ignore virtual environments
+venv/
+.env/
+
+# Ignore large or model files
+*.yml
+*.pkl
+*.h5
+*.pt
+*.onnx
+*.zip
+*.rar
+*.tar
+*.tar.gz
+
+# Ignore cache and temp files
+__pycache__/
+*.pyc
+.DS_Store

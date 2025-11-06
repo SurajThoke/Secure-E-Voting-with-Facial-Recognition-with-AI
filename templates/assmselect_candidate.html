@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smart Voting System - Select Candidate</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<link href="static/img/favicon.ico" rel="icon">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="static/lib/animate/animate.min.css" rel="stylesheet">
+<link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+
+<style>
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f8ff;
+    padding: 40px 0;
+}
+.ballot-card {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    width: 900px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.12);
+}
+.govtag {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #063970;
+    letter-spacing: 0.8px;
+}
+.heading-main {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #002b5b;
+}
+.subtag {
+    font-size: 17px;
+    color: #555;
+}
+.vote-instructions {
+    background: #eaf3ff;
+    border-left: 5px solid #0A66C2;
+    padding: 12px 15px;
+    margin: 18px 0;
+}
+.vote-instructions li {
+    font-size: 15px;
+}
+.candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    justify-items: center;
+    margin-top: 25px;
+}
+.candidate-card {
+    text-align: center;
+}
+.candidate-card img {
+    width: 120px;
+    height: 120px;
+    transition: 0.2s;
+}
+input[type="radio"]:checked + img {
+    outline: 4px solid #004cff;
+    border-radius: 8px;
+}
+.btn-vote {
+    width: 260px;
+    height: 65px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 25px;
+}
+.quote {
+    font-style: italic;
+    color: #004080;
+    font-size: 14px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                <a href="{{ url_for('admin') }}" class="nav-item nav-link">Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center>
+<div class="col-md-8">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</div>
+</center>
+
+<!-- Ballot Container -->
+<div class="hero">
+<div class="ballot-card">
+
+<p class="govtag">Government of India — Authorized Voting Portal</p>
+<h2 class="heading-main"><i class="fas fa-vote-yea"></i> Assembly Election Ballot</h2>
+<p class="subtag">Village / Ward: <b>{{ village }}</b></p>
+
+<div class="vote-instructions">
+<ul>
+<li>Select only one party symbol.</li>
+<li>Make sure you choose carefully — your vote cannot be changed.</li>
+<li>This system ensures privacy and secure ballot encryption.</li>
+</ul>
+</div>
+
+<p class="quote">"Every vote is a voice — cast it with pride."</p>
+
+<form action="{{ url_for('assmselect_candidate') }}" method="post">
+
+<div class="candidate-grid">
+
+{% if noms[0] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[0] }}" hidden>
+<img src="/static/logos/{{ noms[0] }}">
+</label>
+{% endif %}
+
+{% if noms[1] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[1] }}" hidden>
+<img src="/static/logos/{{ noms[1] }}">
+</label>
+{% endif %}
+
+{% if noms[2] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[2] }}" hidden>
+<img src="/static/logos/{{ noms[2] }}">
+</label>
+{% endif %}
+
+{% if noms[3] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[3] }}" hidden>
+<img src="/static/logos/{{ noms[3] }}">
+</label>
+{% endif %}
+
+{% if noms[4] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[4] }}" hidden>
+<img src="/static/logos/{{ noms[4] }}">
+</label>
+{% endif %}
+
+{% if noms[5] is defined %}
+<label class="candidate-card">
+<input type="radio" name="test" value="{{ noms[5] }}" hidden>
+<img src="/static/logos/{{ noms[5] }}">
+</label>
+{% endif %}
+
+</div>
+
+<center>
+<input type="submit" class="btn btn-primary btn-vote" value="Cast Vote">
+</center>
+
+</form>
+
+</div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="static/js/main.js"></script>
+</body>
+</html>

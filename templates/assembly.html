@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Smart Voting System - Add Nominee</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="static/img/favicon.ico" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <link href="static/css/style.css" rel="stylesheet">
+
+<style>
+    /* === FIX 1: FORCE PAGE SCROLLING (The reason the page wasn't scrolling) === */
+    html {
+        height: 100%;
+    }
+    body { 
+        font-family: 'Poppins', sans-serif;
+        min-height: 100%;
+        /* Explicitly force vertical scrollbar if content exceeds viewport */
+        overflow-y: scroll !important; 
+        position: relative;
+    }
+    /* ========================================================================= */
+    
+    .hero {
+        padding-top: 60px;
+        background: linear-gradient(to right, #1d3557, #2a5298);
+        color: #fff;
+        /* FIX 2: Increased padding-bottom to ensure the button is visible */
+        padding-bottom: 150px; 
+        /* Ensure it grows with content and doesn't restrict its own height */
+        height: auto; 
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .tagline {
+        font-size: 18px;
+        margin-top: 10px;
+        font-style: italic;
+        text-align: center;
+        opacity: .9;
+    }
+
+    .form-box {
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        margin-top: 30px;
+    }
+
+    .form-box h4 {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .quote-box {
+        font-size: 18px;
+        font-weight: 500;
+        color: #05445E;
+        background: #F1FAFF;
+        padding: 12px;
+        border-left: 4px solid #0077c8;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+
+    /* Party Symbol Styling */
+    input[type="radio"] + img {
+        cursor: pointer;
+        transition: 0.2s;
+        border-radius: 6px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    input[type="radio"]:checked + img {
+        transform: scale(1.08);
+        border: 3px solid #0077c8;
+    }
+
+    .radio-item{
+        display: inline-block;
+        margin: 10px 10px;
+    }
+
+    .radio-wrapper {
+        margin-bottom: 40px;
+    }
+
+    .btn-submit {
+        font-size: 22px;
+        width: 200px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #004aad;
+        border: none;
+        color: #fff;
+        transition: .3s;
+    }
+
+    .btn-submit:hover {
+        background: #003580;
+    }
+
+    /* === MOBILE/SMALL SCREEN FIXES === */
+
+    @media (max-width: 767px) {
+        .form-box {
+            padding: 20px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .radio-item {
+            /* Ensures 2 symbols fit side-by-side on most phones */
+            width: 45%; 
+            margin: 5px 2%;
+            text-align: center;
+        }
+
+        .radio-item img {
+            /* Adjust size to fit in the 45% width */
+            width: 100px; 
+            height: 80px;
+        }
+        
+        .hero {
+            padding-top: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 28px;
+        }
+        
+        .btn-submit {
+            width: 180px;
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container"> 
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                <a href="#" class="nav-item nav-link active">Vote</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hero">
+    <div class="container">
+
+        <h1 class="animate_animated animate_fadeInDown">
+            Add Nominee for Assembly Elections
+        </h1>
+
+        <p class="tagline">
+            "Strong leaders build a stronger tomorrow — add candidates who inspire progress."
+        </p>
+        
+        <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11"> 
+        
+        <div class="form-box">
+
+            <div class="quote-box">
+                <i class="fas fa-bullhorn"></i> Please enter valid information & assign a party symbol.
+            </div>
+
+            <center>
+            <div class="col-md-10">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            </center>
+
+            <form action="{{ url_for('assembly') }}" method="post">
+                <div class="form-row">
+                    <div class="form-group col-12 col-md-4"> 
+                        <select class="form-control" name="state" required>
+                            <option value="">Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4"> 
+                        <input type="text" name="member_name" class="form-control" placeholder="Nominee Name" required>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4"> 
+                        <input type="text" name="party_name" class="form-control" placeholder="Party Name" required>
+                    </div>
+                </div>
+
+                <center><h4>Select Party Symbol</h4></center>
+
+                <div class="row justify-content-center flex-wrap"> 
+                    {% for i in range(1,8) %}
+                    <label class="radio-item">
+                        <input type="radio" name="test" value="{{i}}.png" required>
+                        <img src="/static/logos/{{i}}.png" width="140" height="110" alt="Party Symbol {{i}}">
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <input type="submit" value="Add Nominee" class="btn-submit">
+                </div>
+            </form>
+        </div>
+        
+        </div>
+        </div>
+    </div>
+</div>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>

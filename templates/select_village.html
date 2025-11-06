@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Smart Voting System - Select Constitution</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="static/img/favicon.ico" rel="icon">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <link href="static/css/style.css" rel="stylesheet>
+
+    <style>
+        .hero-section {
+            padding-top: 120px;
+            padding-bottom: 100px;
+        }
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            max-width: 600px;
+            margin: auto;
+        }
+        .hero-title {
+            font-size: 34px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .hero-quote {
+            font-size: 18px;
+            font-weight: 400;
+            color: #f8f9fa;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        .instruction-text {
+            font-size: 15px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav Bar Start -->
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                    <a href="{{ url_for('train') }}" hidden class="nav-item nav-link">Train</a>
+                    <a href="#" class="nav-item nav-link">Vote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+
+    <center>
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </center>
+
+    <!-- Hero Start -->
+    <div class="hero hero-section" style="background: linear-gradient(135deg,#00204a,#005792,#00bbf0);">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="hero-title">Select Constitution for Result</h1>
+                <div class="hero-quote">"Your voice matters — every vote builds the future."</div>
+            </div>
+
+            <div class="form-card mt-4">
+                <p class="instruction-text text-center">
+                    Please choose your state to view the voting results.
+                </p>
+
+                <form action="{{ url_for('select_village') }}" method="post">
+                    <div class="form-group">
+                        <label><b>Select State</b></label>
+                        <select class="form-control" name="state" id="inputState">
+                            <option value="SelectState">Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">
+                                Dadra and Nagar Haveli and Daman and Diu
+                            </option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" style="font-size: 20px;">View</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="static/lib/easing/easing.min.js"></script>
+    <script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="static/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="static/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="static/mail/contact.js"></script>
+    <script src="static/js/main.js"></script>
+
+</body>
+</html>

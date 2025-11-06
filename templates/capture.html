@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Smart Voting System - Capture Images</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="static/img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+<style>
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+.capture-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    max-width: 650px;
+    width: 100%;
+}
+.govtag {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #0A66C2;
+    letter-spacing: 1px;
+}
+.capture-title {
+    font-weight: 800;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+.capture-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+.quote-box {
+    background: #eef6ff;
+    border-left: 5px solid #0A66C2;
+    padding: 12px 16px;
+    font-style: italic;
+    color: #003f7f;
+    margin-bottom: 20px;
+}
+.btn-capture {
+    width: 260px;
+    height: 70px;
+    font-size: 22px;
+    font-weight: 700;
+}
+.footer-note {
+    font-size: 13px;
+    color: #666;
+    margin-top: 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                <a href="{{ url_for('admin') }}" class="nav-item nav-link">Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Nav Bar End -->
+
+<center>
+<div class="col-md-8">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+</center>
+
+<!-- Hero Section -->
+<div class="hero">
+    <div class="capture-card">
+
+        <p class="govtag">Government of India — Election Commission Portal</p>
+        <h2 class="capture-title"><i class="fas fa-camera"></i> Capture Facial Data</h2>
+
+        <div class="quote-box">
+            "Your identity is your vote. Your security is our responsibility."
+        </div>
+
+        <p class="capture-text">This step verifies your identity through facial recognition. Please read instructions carefully:</p>
+
+        <ul style="font-size: 16px; margin-top: 12px; text-align:left;">
+            <li>Ensure proper lighting on your face</li>
+            <li>Remove masks, caps or sunglasses</li>
+            <li>Stand at a normal distance from the camera</li>
+            <li>Look straight at the camera during capture</li>
+        </ul>
+
+        <form action="{{ url_for('capture_images') }}" method="post">
+            <br>
+            <input class="btn btn-primary btn-capture" type="submit" value="Start Capture">
+        </form>
+
+        <p class="footer-note">This process is secure and encrypted by National Digital Voting System.</p>
+    </div>
+</div>
+
+<!-- Back to top -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="static/lib/easing/easing.min.js"></script>
+<script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="static/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="static/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="static/mail/jqBootstrapValidation.min.js"></script>
+<script src="static/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="static/js/main.js"></script>
+
+</body>
+</html>

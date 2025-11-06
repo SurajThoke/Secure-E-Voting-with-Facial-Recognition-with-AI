@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Smart Voting System - Verification</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<link href="static/img/favicon.ico" rel="icon">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="static/lib/animate/animate.min.css" rel="stylesheet">
+<link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+
+<style>
+.hero-section {
+    padding-top: 120px;
+    padding-bottom: 100px;
+}
+.form-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+}
+.hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+}
+.hero-quote {
+    font-size: 17px;
+    font-style: italic;
+    color: #e8f8ff;
+    margin-top: 8px;
+}
+.instruction-text {
+    font-size: 14px;
+    color: #555;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
+                <a href="{{ url_for('admin') }}" class="nav-item nav-link">Admin</a>
+                <a href="{{ url_for('train') }}" class="nav-item nav-link">Train</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Nav Bar End -->
+
+<center>
+<div class="col-md-8">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+{{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+</center>
+
+<!-- Hero Start -->
+<div class="hero hero-section" style="background: linear-gradient(135deg,#003e92,#005ba4,#0099e6);">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="hero-title">Email Verification</h1>
+            <div class="hero-quote">"Secure voting begins with secure identity."</div>
+        </div>
+
+        <div class="form-card mt-4">
+            <p class="instruction-text text-center mb-3">
+                Enter the OTP sent to your registered email address.
+            </p>
+
+            <form action="{{ url_for('verify') }}" method="post">
+                <div class="form-group">
+                    <input type="text" name="otp_check" class="form-control" placeholder="Enter OTP" required />
+                </div>
+
+                <button class="btn btn-primary btn-block" style="font-size:18px;">Verify</button>
+            </form>
+
+            <p class="text-center mt-3" style="font-size: 13px; color:#888;">
+                Didn’t receive the code? Check spam folder or request again.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="static/lib/easing/easing.min.js"></script>
+<script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="static/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="static/lib/lightbox/js/lightbox.min.js"></script>
+<script src="static/mail/jqBootstrapValidation.min.js"></script>
+<script src="static/mail/contact.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+</html>
